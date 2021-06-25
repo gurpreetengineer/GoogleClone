@@ -1,70 +1,147 @@
-# Getting Started with Create React App
+# Google Clone Using React
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Note: Google Search API provides you a __Unique KEY__ which only gives you privilege to send 100 requests a day.
+If you want to test or improve or bring changes into this clone, no worries. This project contains a dummy data file at path ***'src/TESLA_SEARCH_RESPONSE.js'*** which you can use while testing or for own respective uses.
+
+## Links to follow for Google Search API:
+
+STEP 1:
+  https://developers.google.com/custom-search/v1/overview 
+  Then click on "GET KEY", 
+  sign in to your respective Google Account, 
+  Choose your app, which you've created in your firebase account. 
+  Copy your API_KEY. [KEY NO. 1]
+  Use that API_KEY in your Google search API.
+
+STEP 2:
+ Go to https://cse.google.com/cse/create/new
+ Then write, www.google.com, in Sites to search input field,(remember this is the field where you specify the search engine. You can choose whichever you want according to your needs.)
+ This will create a CONTEXT_KEY, copy it and move to the STEP 3. [KEY NO. 2]
+ 
+STEP 3: 
+  Use this link: https://www.googleapis.com/customsearch/v1?key=${API_KEY}&cx=${CONTEXT_KEY}&q=${term}
+  where you put API_KEY and CONTEXT_KEY and the term which you wants to search.
+
+  For this you can use any HTTP request API. 2 of the popular ones are:
+  1_ Axios
+  2_ Fetch API
+  
+## Topics Covered:
+
+### React Hooks and building Custom Hooks
+### Google Custom Search API
+### React Router
+### Custom CSS, Material UI, Styled Components
+### Firebase to connect React App to Google
+### Firebase Hosting 
+### Prop-Types and default props
+
 
 ## Available Scripts
 
-In the project directory, you can run:
-
 ### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
 ### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
 ### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
 ### `npm run build` fails to minify
+### `npm run lint` To fix any linting errors.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+# Here are notes that, I believe, are going to help you a fortune:
+
+## ****** FIRST TIME INSTALLATION OF ESLINT ?? *******
+
+### Step 0 => 
+  npm install eslint-plugin-react --save-dev OR
+  npm install eslint --save-dev
+### Step 1 => 
+  ./node_modules/.bin/eslint --init    (IN CASE YOU FORGET THIS, GO AT THE "Step NOT_RECOMMENDED but WORKING")
+  Execute this command from root directory of your project!
+
+### Step 2 => Create .eslintsrc file (if doesn't exist AFTER Step 0) in root directory of project
+  And add this line
+  { "extends": ["eslint:recommended", "plugin:react/recommended"] }
+
+### Step 3 =>
+  If "import" Error occurs in .js files, add (in .eslintrc.js):
+
+  "parser": "babel-eslint"   (with)
+  npm i babel-eslint --save-dev
+
+### Step 4 =>
+  If any error occurs for "document" in index.js, add the following line:
+  Add 1st line (before import statements):  /* eslint-env browser */
+  For further reference, refer to following link: https://stackoverflow.com/questions/41858052/solving-linter-error-no-undef-for-document
+
+### Step 5 =>
+  fix errors: (in package.json)
+  "scripts": {
+      "lint": "eslint --fix --ext .js,.jsx ."
+  }
+
+  Run ==> "npm run lint"
+
+### Step 6 => To remove "React components" import and --unused-vars errors. (in .eslintrc.js)
+  'extends': [
+      'plugin:react/recommended'
+  ]
+
+### Step 7 => If async arrow function gives error of "eslint Parsing error: Unexpected token function with async"
+  Do this, Go to .eslintrc.js file,
+  add this (if parseOptions already exist, just add the line "ecmaVersion": 8):
+  "parserOptions": {
+    "ecmaVersion": 8
+  }
+
+
+### Step NOT_RECOMMENDED but WORKING:
+(-------------------- HERE------------------)  Save as ( .eslintrc.js ) in root directory
+  module.exports = {
+      "env": {
+          "browser": true,
+          "es6": true
+      },
+      "extends": [
+          "eslint:recommended",
+          'plugin:react/recommended'
+      ],
+      "parserOptions": {
+          "ecmaFeatures": {
+              "experimentalObjectRestSpread": true,
+              "jsx": true
+          },
+          "sourceType": "module"
+      },
+      "plugins": [
+          "react"
+      ],
+      "rules": {
+          "indent": [
+              "error",
+              "tab"
+          ],
+          "linebreak-style": [
+              "error",
+              "unix"
+          ],
+          "quotes": [
+              "error",
+              "single"
+          ],
+          "semi": [
+              "error",
+              "always"
+          ]
+      }
+  };
+
+If you get a error while building, stating
+
+Failed to compile.
+./src/index.css
+Module build failed: BrowserslistError: Unknown browser query `dead`
+    at Array.forEach (<anonymous>)
+
+__Remove not dead in package.json file or browserslist(if at older version)__
+
+
+**not dead**: Exclude browsers without official support in the last 24 months. not ie <= 11: Exclude IE 11 and older versions.
