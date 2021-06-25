@@ -47,6 +47,6 @@ export const FetchKey = () => {
 
 // Alternative to above secure way, Less secure but fast way is below:
 
-const API_KEY = 'AIzaSyAmckbDtuc5aJuPGP_fnGVapN8lYj3Dwn8';
+const API_KEY = 'AIzaSyBlD1TG48StkcsFXmYwCOd6kML4PyS55GA';
 
 export default API_KEY;
